@@ -871,10 +871,10 @@ for($i=0;$i<count($arr1);$i++)
 var_dump($arr1);*/
 
 
-$str = '31.12.2025';
-echo preg_replace('#([0-9]+)\.([0-9]+)\.([0-9]+)#','$3.$2.$1',$str);
+// $str = '31.12.2025';
+// echo preg_replace('#([0-9]+)\.([0-9]+)\.([0-9]+)#','$3.$2.$1',$str);
 
 
-$str = 'aaa aaa bbb bbb ccc ddd';
-echo preg_replace('#([a-z]+\s)\1+#','!',$str);
+// $str = 'aaa aaa bbb bbb ccc ddd';
+// echo preg_replace('#([a-z]+\s)\1+#','!',$str);
 ?>
