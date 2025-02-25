@@ -1,0 +1,93 @@
+/*#elem {
+	width: 300px;
+	height: 150px;
+	margin: 50px auto;
+	padding: 25px;
+	background: #CFF5BF;
+	border: 25px solid #F0D7A1;
+	overflow: auto;
+	text-align: justify;
+}*/
+/*html, body {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    justify-content: center;
+    background-color: antiquewhite;
+}
+main {
+    width: 80%;
+    min-height: 5000px;
+    background-color: burlywood;
+    box-shadow: 0 0 10px black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+section {
+    width: 90%;
+    min-height: 800px;
+    background-color: rgb(66, 39, 139);
+    box-shadow: 0 0 20px rgb(119, 1, 143);
+    border-radius: 20px;
+    margin-top: 20px;
+    padding: 30px;
+    display: flex;
+    align-items: flex-end;
+}
+.targetBlock {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    background-color:aquamarine;
+    box-shadow: inset 0 0 10px 8px rgb(12, 12, 12);
+}
+section:nth-child(odd) {
+    justify-content: flex-end;
+}
+.jumpingBlock {
+    width: 50px;
+    height: 50px;
+    background-color:brown;
+    box-shadow: 10px 10px 10px black;
+    position: absolute;
+    transition: left 0.5s ease, top 0.5s ease;    
+    z-index: 2;
+}
+
+#ad{
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 20%;
+    height: 20%;
+    background-color: rgba(0, 0, 0, 0.563);
+    border: 2px solid rgba(238, 16, 16, 0.694);
+    border-radius: 30px;
+    transition: left 1.5s ease;
+    position: fixed;
+    z-index: 3;
+    top: 50%;
+    right: 0;
+    box-sizing: border-box;
+    color: white;
+    animation-name: anim;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+
+}
+
+
+@keyframes anim{
+    0%{
+        transform: translate(0)
+    }
+
+    100%{
+        transform: translate(-225px, 0)
+    }
+}*/

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Таблица с рандомными цифрами</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        td {
+            width: 50px;
+            height: 50px;
+            border: 1px solid black;
+            text-align: center;
+            vertical-align: middle;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            user-select: none;
+        }
+
+        .correct {
+            background-color: lightgreen;
+        }
+
+        .incorrect {
+            background-color: lightcoral;
+        }
+        h1{
+            text-align: center;
+            font-size: 24px;
+            border-bottom: 1px solid black;
+        }
+        input{
+            margin-bottom: 10px;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #generateButton{
+            margin-top: 10px;
+            font-size: 18px;
+            color: red;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Таблица с рандомными цифрами</h1>
+
+    <label for="rows">Количество строк:</label>
+    <input type="number" id="rows" value="5" min="1">
+
+    <label for="cols">Количество столбцов:</label>
+    <input type="number" id="cols" value="5" min="1">
+
+    <button id="generateButton">Сгенерировать таблицу</button>
+
+    <div id="countdown"></div>
+
+    <table id="table"></table>
+
+    <script>
+        const rowsInput = document.getElementById('rows');
+        const colsInput = document.getElementById('cols');
+        const generateButton = document.getElementById('generateButton');
+        const table = document.getElementById('table');
+        const countdownDiv = document.getElementById('countdown');
+
+        let numbers = [];
+        let currentNumber = 1;
+        let isGameStarted = false;
+        let clicks = 0;
+        let timer = null;
+
+        generateButton.addEventListener('click', generateTable);
+
+        function generateTable() {
+            const rows = parseInt(rowsInput.value);
+            const cols = parseInt(colsInput.value);
+            table.innerHTML = '';
+            numbers = [];
+            clicks = 0;
+            currentNumber = 1;
+
+            if (timer) clearInterval(timer);
+            countdownDiv.innerHTML = '';
+
+            numbers = generateRandomNumbers(rows * cols);
+
+            for (let i = 0; i < rows; i++) {
+                const row = table.insertRow();
+                for (let j = 0; j < cols; j++) {
+                    const cell = row.insertCell();
+                    const number = numbers.shift();
+                    cell.innerHTML = `<span class="number" style="font-size: ${getRandomSize(20, 50)}px; color: ${getRandomColor()}">${number}</span>`;
+                    cell.addEventListener('click', handleCellClick);
+                }
+            }
+
+            countdown(20);
+            isGameStarted = true;
+        }
+
+        function countdown(seconds) {
+            let remainingTime = seconds;
+            countdownDiv.innerHTML = `Осталось времени: ${remainingTime} секунд`;
+
+            timer = setInterval(() => {
+                remainingTime--;
+                countdownDiv.innerHTML = `Осталось времени: ${remainingTime} секунд`;
+                if (remainingTime <= 0) {
+                    clearInterval(timer);
+                    alert("Время вышло!");
+                    isGameStarted = false;
+                }
+            }, 1000);
+        }
+
+        function generateRandomNumbers(count) {
+            const nums = [...Array(count).keys()].map(i => i + 1);
+            shuffleArray(nums);
+            return nums;
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function getRandomSize(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function handleCellClick(event) {
+            if (!isGameStarted) {
+                return;
+            }
+
+            const clickedNumber = parseInt(event.target.innerText);
+            if (clickedNumber === currentNumber) {
+                //clicks++;
+                event.target.classList.add('correct');
+                currentNumber++;
+
+                // Проверка на завершение игры
+                if (currentNumber == numbers.length) {
+                    clearInterval(timer);
+                    alert('Вы выйграли!');
+                    isGameStarted = false;
+                }
+            } else {
+                alert('Неверный порядок!');
+                event.target.classList.add('incorrect');
+            }
+        }
+
+    </script>
+</body>
+
+</html>
